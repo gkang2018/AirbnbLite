@@ -4,12 +4,6 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style>
-            body {
-                background-color: rgb(240, 100, 50); 
-            }
-            #card-title{
-                text-align: center;
-            }   
             
             html { 
                 background: url("/static/images/airbnbHomeImage.jpg") no-repeat center center fixed; 
@@ -20,7 +14,7 @@
             }
 
             .transparent {
-                background-color: rgb(240, 100, 50); 
+                background-color: rgba(240, 100, 50, 240); 
             }
 
             .navText {
@@ -48,27 +42,13 @@
                 <li class = "test"><a href="#"><span class = "navText">Host a Home</span></a></li>
                 <li><a class = "navText" href="#"><span class = "navText">Host an Experience</span></a></li>
                 <li><a class = "navText" href="/register/"><span class = "navText">Sign Up</span></a></li>
-                <li><a class = "navText" href="#"><span class = "navText"> Login</span></a></li>
+                <li><a class = "navText" href="/login/"><span class = "navText"> Login</span></a></li>
 
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
 
-	<div class = "row text-center" style = "display: flex; flex-wrap: wrap;">
-		<div class = "col-md-3 col-sm-6"> 
-		
-			<div class = "caption">
-				<h4>
-					View List of airbnbs
-				</h4>
-			</div>
-			<p>
-				<a class = "btn btn-primary" href = "/properties/">View Airbnbs</a>
-			</p>
-
-		</div>
-	</div>
 
 </body>
 </html>

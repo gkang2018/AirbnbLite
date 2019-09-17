@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>List of all of the Airbnb Properties</title>
+    <title>List of all of the Airbnb Properties</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
         <div class = "container">
@@ -29,26 +30,28 @@
                 </div>
                 
                 <div class = "row text-center" style = "display: flex; flex-wrap: wrap;">
-                    {% for prop in props %}
-                        <div class = "col-md-3 col-sm-6"> 
-                            <div class = "thumbnail">
-                                <img src = "{{ prop.image }}">
-                            </div>
-                            
-                            <div class = "caption">
-                                <h4>
-                                    {{ prop.name }}
-                                </h4>
-                            </div>
-                            <div class = "caption">
-                                {{ prop.propertyTpe }}
-                            </div>
-                
-                        </div>
+                    {% for property in props %}
+                    <div class = "col-md-3 col-sm-6"> 
+                                <div class = "thumbnail">
+                                  <img src = "{{property.image}}">
+                                </div>
+                                <div class = "caption">
+                                        <h4>{{property.name}}</h4>
+                                </div>
+                                
+                                <div class = "caption">
+                                    <h4>
+                                        {{property.propertyType}}
+                                    </h4>
+                                </div>
+                                <div class = "caption">
+                                    <h4>{{property.price}}</h4>
+                                </div>
+
+
+                    
+                    </div>
                     {% endfor %}
-                </div>
-            
-            
-            </div>
+                </div> 
 </body>
 </html>
