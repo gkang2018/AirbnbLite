@@ -18,12 +18,15 @@ def helloWorld():
 @app.route("/register/", methods=["GET"]) 
 def register(): 
     form = RegistrationForm()
-         if form.validate_on_submit(): 
-         document = {
-             "username": form.username.data,
-             "password": form.password.data, 
-             "accountType": 
-         }
+    if form.validate_on_submit(): 
+            document = {
+                "username": form.username.data,
+                "password": form.password.data, 
+                "accountType": "", 
+                "properties": {
+                    
+                }
+         }  
     return Response(render_template("Register.html", form = form), status=200, content_type = "text/html")
 
 @app.route("/login/", methods = ["GET", "POST"])
