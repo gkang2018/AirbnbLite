@@ -15,18 +15,19 @@ def helloWorld():
     # return one line of html, if we get to this response, return a 200 status code
     return Response(render_template("homePage.html"), status = 200, content_type="text/html")
 
-@app.route("/register/", methods=["GET"]) 
+@app.route("/register/", methods=["GET", "POST"]) 
 def register(): 
     form = RegistrationForm()
+    # tells us if the registration was successfully validated 
     if form.validate_on_submit(): 
             document = {
                 "username": form.username.data,
                 "password": form.password.data, 
-                "accountType": "", 
-                "properties": {
-                    
-                }
-         }  
+                "accountType": form.accountType.data, 
+                "properties": []
+             } 
+            db.insert("users", document)
+            return redirect("/") 
     return Response(render_template("Register.html", form = form), status=200, content_type = "text/html")
 
 @app.route("/login/", methods = ["GET", "POST"])
