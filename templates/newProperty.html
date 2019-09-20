@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style> 
+
+    </style>
+</head>
+<body>
+    <nav class="navbar transparent navbar-inverse">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href = "/" class="navbar-brand" href="#"><span class = "navText">AirbnbLite</span></a>
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class = "test"><a href="#"><span class = "navText">Host a Home</span></a></li>
+                <li><a class = "navText" href="#"><span class = "navText">Host an Experience</span></a></li>
+                <li><a class = "navText" href="#"><span class = "navText">Sign Up</span></a></li>
+                <li><a class = "navText" href="#"><span class = "navText"> Login</span></a></li>
+
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+        <div class = "container">
+            <div class = "content-section"> 
+                <form method = "POST" action = "/register/" class="form-horizontal">
+                        {{form.hidden_tag()}}
+                        <fieldset class = "form-group">
+                            <legend class = "border-bottom mb-4">Join Today</legend>
+                            <div class = "form-group">
+                                {{ form.username.label(class='form-control-label') }}
+
+                                {% if form.username.errors %}
+                                    <div class = "has-error has-feedback">
+                                        {% for error in form.username.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.username(class='form-control form-control-lg') }} 
+                                {% endif %}
+                            </div>
+                            <div class = "form-group">
+                                {{ form.accountType.label(class='form-control-label') }}
+                                {% if form.accountType.errors %}
+                                    <div class = "has-error has-feedback">
+                                        {% for error in form.accountType.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.accountType(class='form-control form-control-lg') }} 
+                                {% endif %}
+                            </div>
+                            <div class = "form-group">
+                                    {{ form.email.label(class='form-control-label') }}
+                                    {% if form.email.errors %}
+                                        <div class = "has-error has-feedback">
+                                            {% for error in form.email.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.email(class='form-control form-control-lg') }} 
+                                    {% endif %}
+                            </div>
+                            <div class = "form-group">
+                                    {{ form.password.label(class='form-control-label') }}
+                                    {% if form.password.errors %}
+                                        <div class = "has-error has-feedback">
+                                            {% for error in form.password.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.password(class='form-control form-control-lg') }} 
+                                    {% endif %}
+                            </div>
+                            <div class = "form-group">
+                                    {{ form.confirm_password.label(class='form-control-label') }}
+                                    {% if form.confirm_password.errors %}
+                                        <div class = "has-error has-feedback">
+                                            {% for error in form.confirm_password.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ form.confirm_password(class='form-control form-control-lg') }} 
+                                    {% endif %}
+                            </div>
+                        </fieldset>
+                        <div class = "form-group">
+                            {{ form.submit(class="btn btn-success") }}
+                        </div>
+                    </form>
+                </div>
+                <div class = "border-top pt-3">
+                        <small class = "text-muted">
+                            Already have an account <a href = "/login/"> Sign in</a>
+                        </small>
+                </div>
+            </div>
+            
+</body>
+</html>
