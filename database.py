@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from flask import jsonify
 
 class DatabaseConnection():
-
+    
     def __init__(self):
         client = MongoClient('localhost', 27017)
         self.db = client["airbnblite"]

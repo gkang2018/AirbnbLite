@@ -15,11 +15,11 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password')])
     submit = SubmitField("Sign Up")
 
-    def validateUsername(self, username): 
+    def validate_username(self, username): 
         user = db.findOne("users", {"username": username.data})
         if user: 
             raise ValidationError("That username is taken")
-    def validateEmail(self, email): 
+    def validate_email(self, email): 
         email = db.findOne("users", {"email": email.data})
         if email: 
             raise ValidationError("That email is already taken")
@@ -29,3 +29,4 @@ class LoginForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField("Login")
+    
