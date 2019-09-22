@@ -1,6 +1,6 @@
 from flask import Flask, Response, request, jsonify, render_template, redirect, flash, session
 from flask_pymongo import pymongo
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, PropertyForm
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, UserMixin, current_user, logout_user, AnonymousUserMixin, login_required
 from database import DatabaseConnection
@@ -80,11 +80,12 @@ class User(UserMixin):
 
 class Anonymous(User, AnonymousUserMixin):
   def __init__(self):
-    self.lastname = 'Guest'
+      self.lastname = ""
 
+ 
 class AnonymousLogout(AnonymousUserMixin): 
     def __init__(self): 
-        self.name = ""
+        self.lastname = ""
 
 @app.route("/", methods=["GET"]) 
 def homePage(): 
@@ -116,9 +117,8 @@ def login():
      if form.validate_on_submit(): 
          user = User.get_by_email(form.email.data)
          if User.login_valid(form.email.data, form.password.data): 
-             login_user(user, remember = form.remember.data)
+             login_user(user, remember = form.remember.data, force = True)
              login_manager.anonymous_user = Anonymous
-             print(current_user.accountType)
              flash('You have been logged in!', 'success')
              return redirect("/properties")
          else: 
@@ -132,7 +132,7 @@ def getProperties():
     properties = db.findMany("properties", {"user": []})
     return render_template("properties.html", props=properties)
 
-@app.route("/rentedProperties", methods = ["GET", "POST"])
+@app.route("/rentedProperties/", methods = ["GET", "POST"])
 def rentedProperties(): 
     if request.method == "POST": 
        propertyName = request.form.get("propertyName")
@@ -140,23 +140,25 @@ def rentedProperties():
        property = db.findOne("properties", {"name": propertyName, "price": propertyPrice})
        property.user.append(current_user._id)
        current_user.properties.append(property._id)
-    else: 
+    propertiesId = current_user.properties
+    rentedProperties = db.findMany("properties", {"_id": propertiesId})
+    return Response(render_template("rentedProperties.html", title = "Rented Properties", rentedProperties = rentedProperties), status=200, content_type="text/html")
         
-@app.route("/new/<id>", methods = ["GET"]) 
-def newProperty(): 
-    return render_template("newProperty.html")
 
-@app.route("/addNewProperty/", methods = ["POST"])
+@app.route("/addNewProperty/", methods = ["GET", "POST"])
 def addNewProperty(): 
-    document = {
-        "name": request.form["name"], 
-        "propertyType": request.form["propertyType"], 
-        "price": request.form["price"], 
-        "image": request.form["image"], 
-        "user": []
-    }
-    db.insert("properties", document)
-    return Response("Property succesfully added", status = 200, content_type="text/html")
+    form = PropertyForm()
+    if form.validate_on_submit(): 
+        document = {
+            "name": form.name.data, 
+            "propertyType": form.propertyType.data, 
+            "price": form.price.data, 
+            "image": form.image.data, 
+            "user": current_user._id
+        }
+        db.insert("properties", document)
+        return redirect("/properties")
+    return render_template("newProperty.html", form = form)
 
 @app.route("/logout/")
 def logout():

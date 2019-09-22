@@ -29,4 +29,10 @@ class LoginForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField("Login")
-    
+
+class PropertyForm(FlaskForm): 
+    name = StringField("Property Name", validators=[DataRequired()])
+    propertyType = StringField("Property Type", validators=[DataRequired()])
+    price = StringField("Price", validators=[DataRequired()])
+    image = StringField("Image", validators=[DataRequired()])
+    submit = SubmitField("Add a New Property")

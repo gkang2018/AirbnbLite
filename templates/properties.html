@@ -13,11 +13,11 @@
                 {% if current_user.is_authenticated %}
                     {% if current_user.accountType == renter %}
                         <p>
-                            <a class = "btn btn-primary btn-lg" href = "/">View Your Rented Properties</a>
+                            <a class = "btn btn-primary btn-lg" href = "/rentedProperties/">View Your Rented Properties</a>
                         </p>
                     {% elif current_user.accountType == vendor %} 
                         <p>
-                            <a class = "btn btn-primary btn-lg" href = "/">Add a new properties</a>
+                            <a class = "btn btn-primary btn-lg" href = "/addNewProperty/">Add a new properties</a>
                         </p>
                     {% endif %}
                 {% else %}
@@ -36,19 +36,19 @@
         
         <div class = "row text-center" style = "display: flex; flex-wrap: wrap;">
             {% for property in props %}
-            
-            <form action method = "POST" action = "/rentedProperties">
                 <div class="card col-md-3 col-sm-6" style="width: 18rem;">
+                    <form action method = "POST" action = "/rentedProperties">
                         <img class="card-img-top" src= "/static/images/paris.jpg" alt="Card image cap">
-                        <div class="card-body">
-                        <h5 name = "propertyName" class="card-title">{{property.name}}</h5>
-                        <p class="card-text">{{property.propertyType}}</p>
-                        <p name = "propertyPrice" class="card-text">{{property.price}}</p>
-                            <a href="/rentedProperties" class="btn btn-primary">Rent Now</a>
-                        
-                        </div>
+                            <div class="card-body">
+                                <h5 name = "propertyName" class="card-title">{{property.name}}</h5>
+                                <p class="card-text">{{property.propertyType}}</p>
+                                <p name = "propertyPrice" class="card-text">{{property.price}}</p>
+                                <a href="/rentedProperties" class="btn btn-primary">Rent Now</a>
+                    
+                            </div>
+                    </form>
                 </div>
-            </form>
+            
             {% endfor %}
         </div>
             
